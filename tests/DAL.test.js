@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { DAL } from '../src/DAL.js';
 
 describe('DAL', () => {
