@@ -11,7 +11,7 @@ I have not deployed the library to NPM yet, I am using NPM link locally to devel
 
 Install Libraries:
 ```
-npm run install
+npm install
 ```
 
 Build library:
