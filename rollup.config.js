@@ -4,7 +4,7 @@ export default {
   input: 'src/DAL.js',
   output: [
     {
-      file: 'dist/index.cjs.js',
+      file: 'dist/index.cjs',
       format: 'cjs'
     },
     {
