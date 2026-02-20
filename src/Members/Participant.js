@@ -1,7 +1,6 @@
-import Base from "./Base";
+import Base from "../Base";
 /**
- * Class representing a participant in the
- * semantic world.
+ * Class representing a participant in the design.
  */
 class Participant extends Base{
     /**

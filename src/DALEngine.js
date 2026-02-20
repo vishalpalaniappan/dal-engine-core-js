@@ -1,7 +1,7 @@
-import Participant from "./Participant";
-import Behavior from "./Behavior";
-import Invariant from "./Invariant";
-import Primitive from "./Primitive";
+import Participant from "./Attributes/Participant";
+import Behavior from "./Attributes/Behavior";
+import Invariant from "./Attributes/Invariant";
+import Primitive from "./Attributes/Primitive";
 
 /**
  * An object representing an engine written in Design

@@ -1,4 +1,4 @@
-import Base from "./Base";
+import Base from "../Base";
 /**
  * Class representing a Behavior in the
  * semantic world.
