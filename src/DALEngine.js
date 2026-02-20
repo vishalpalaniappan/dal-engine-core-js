@@ -25,34 +25,35 @@ export class DALEngine {
      * Adds a participant type.
      */
     addParticipant(name) {
-        this.participants.push(new Participant(name));
+        const participant = new Participant(name);
+        this.participants.push(participant);
+        return participant;
     }
 
     /**
      * Adds a behavior.
      */
     addBehavior(name) {
-        this.behaviors.push(new Behavior(name));
+        const behavior = new Behavior(name);
+        this.behaviors.push(behavior);
+        return behavior;
     }
 
     /**
      * Adds a invariant.
      */
     addInvariant(name) {
-        this.invariants.push(new Invariant(name));
-    }
-
-    /**
-     * Adds a invariant.
-     */
-    addInvariant(name) {
-        this.invariants.push(new Invariant(name));
+        const invariant = new Invariant(name);
+        this.invariants.push(invariant);
+        return invariant;
     }
 
     /**
      * Adds a primitive.
      */
     addPrimitive(name) {
-        this.primitives.push(new Primitive(name));
+        const primitive = new Primitive(name);
+        this.primitives.push(primitive);
+        return primitive;
     }
 }
