@@ -1,5 +1,5 @@
 # dal-engine-core-js
-This repository contains the JavaScript implementation of the Design Abstraction Language (DAL) core. It exposes APIs for constructing, validating, and analyzing formal design specifications.
+This repository contains the core JavaScript implementation of the Design Abstraction Language Engine (DALE). The engine is formally specified in the Design Abstraction Language (DAL), and this library provides the executable runtime that realizes that specification. It exposes APIs for constructing, validating, and analyzing formal design models, as well as automatically debugging execution traces against them.
 
 ## Usage from Package Manager
 
@@ -43,8 +43,7 @@ In react application:
 import { DAL } from "dal-engine-core-js-lib";
 ```
 
-Now you can use the DAL specification defined by the library to perform the relevant operations.
-
+Now you can use the engine as specified in the library to perform the relevant operations.
 
 # Providing feedback
 
