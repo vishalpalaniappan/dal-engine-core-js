@@ -1,5 +1,6 @@
 import Base from "../Base";
 import GraphNode from "./GraphNode";
+import ENGINE_TYPES from "../TYPES";
 /**
  * Class representing the behavioral control graph.
  */
@@ -10,7 +11,7 @@ class BehavioralControlGraph extends Base{
      */
     constructor(name) {
         super();
-        this.type = "BeahvioralControlGraph";
+        this.type = ENGINE_TYPES.BEHAVIORAL_CONTROL_GRAPH;
         this.nodes = [];
     }
 

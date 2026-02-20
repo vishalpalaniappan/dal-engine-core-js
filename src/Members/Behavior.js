@@ -1,4 +1,5 @@
 import Base from "../Base";
+import ENGINE_TYPES from "../TYPES";
 /**
  * Class representing a Behavior in the
  * semantic world.
@@ -10,7 +11,7 @@ class Behavior extends Base{
      */
     constructor(name) {
         this.name = name;
-        this.type = "Behavior";
+        this.type = ENGINE_TYPES.BEHAVIOR;
     }
 }
 

@@ -1,4 +1,5 @@
 import Base from "../Base";
+import ENGINE_TYPES from "../TYPES";
 /**
  * Class representing a Primitives in the design.
  */
@@ -10,7 +11,7 @@ class Primitive extends Base{
     constructor(name) {
         super();
         this.name = name;
-        this.type = "Primitive";
+        this.type = ENGINE_TYPES.PRIMITIVE;
     }
 }
 
