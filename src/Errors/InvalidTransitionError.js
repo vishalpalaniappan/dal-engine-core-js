@@ -1,4 +1,5 @@
 import DALEngineError from "./DALEngineError";
+
 class InvalidTransitionError extends DALEngineError {
   constructor(from, to) {
     super(`Invalid transition from "${from}" to "${to}"`);

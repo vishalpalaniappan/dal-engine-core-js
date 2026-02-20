@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { DALEngine } from '../src/DALEngine.js';
 import ENGINE_TYPES from '../src/TYPES.js';
+import InvalidTransitionError from '../src/Errors/InvalidTransitionError.js';
 
 describe('DALEngine', () => {
     it('sets the name correctly', () => {
         const dalInstance = new DALEngine("Library Manager");
         expect(dalInstance.name).toBe("Library Manager");
     });
-
     
     it('participant is added correctly', () => {
         const d = new DALEngine("Library Manager");
@@ -15,7 +15,6 @@ describe('DALEngine', () => {
         expect(participant).toHaveProperty("name");
         expect(participant.name).toBe("librarian");
     });
-
     
     it('invariant is added correctly', () => {
         const d = new DALEngine("Library Manager");
@@ -49,7 +48,6 @@ describe('DALEngine', () => {
 
         const foundNode = d.graph.findNode("AcceptBookFromUser");
         expect(foundNode).toStrictEqual(node);
-
         
         const isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AddBookToBasket");
         expect(isSelectable).toBe(true);
@@ -68,8 +66,13 @@ describe('DALEngine', () => {
         isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AnotherBehavior");
         expect(isSelectable).toBe(true);
 
-        isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AddBookToBaket");
-        expect(isSelectable).toBe(false);
+        expect(() => {
+            d.graph.isSelectableBehavior("AcceptBookFromser","AddBookToBasket");
+        }).toThrow(InvalidTransitionError);
+
+        expect(() => {
+            d.graph.isSelectableBehavior("AcceptBookFromUser","ookToBasket");
+        }).toThrow(InvalidTransitionError);
     });
 
 });

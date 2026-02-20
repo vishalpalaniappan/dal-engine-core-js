@@ -2,6 +2,8 @@ import Base from "../Base";
 import GraphNode from "./GraphNode";
 import ENGINE_TYPES from "../TYPES";
 import Behavior from "../Members/Behavior";
+import InvalidTransitionError from "../Errors/InvalidTransitionError";
+
 /**
  * Class representing the behavioral control graph.
  */
@@ -52,15 +54,13 @@ class BehavioralControlGraph extends Base{
     isSelectableBehavior (prevBehaviorName, currBehaviorName) {
         const foundNode = this.findNode(prevBehaviorName);
         if (!foundNode) {
-            console.error("Previous behavior could not be found");
-            // TODO: This is a larger error, think of stratergy for
-            // how to present this.
-            return false;
+            throw new InvalidTransitionError(prevBehaviorName, currBehaviorName);
         }
         if (foundNode.isValidGoToBehavior(currBehaviorName)) {
             return true;
+        } else {
+            throw new InvalidTransitionError(prevBehaviorName, currBehaviorName);
         }
-        return false;
     }
 }
 
