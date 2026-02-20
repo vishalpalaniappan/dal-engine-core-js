@@ -27,6 +27,20 @@ class BehavioralControlGraph extends Base{
         this.nodes.push(node);
         return node;
     }
+
+    /**
+     * Finds the node in the graph given the behavior.
+     * @param {String} behaviorName 
+     */
+    findNode (behaviorName) {
+        for (let i = 0; i < this.nodes.length; i++) {
+            const node = this.nodes[i];
+            const behavior = node.behavior;
+            if (behavior.name === behaviorName) {
+                return node;
+            }
+        }
+    }
 }
 
 export default BehavioralControlGraph;
