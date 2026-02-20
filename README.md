@@ -39,7 +39,7 @@ npm link dal-engine-core-js-lib --save
 You should see the library in node_modules and in package.json.
 
 In react application:
-```
+```js
 import { DAL } from "dal-engine-core-js-lib";
 ```
 
