@@ -10,7 +10,7 @@ class BehavioralControlGraph extends Base{
      */
     constructor(name) {
         super();
-        this.type = "StateMachine";
+        this.type = "BeahvioralControlGraph";
         this.nodes = [];
     }
 
