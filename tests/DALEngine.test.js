@@ -11,22 +11,18 @@ describe('DALEngine', () => {
     
     it('participant is added correctly', () => {
         const d = new DALEngine("Library Manager");
-        d.addParticipant("librarian");
-        const lastParticipant = d.participants[d.participants.length -1];
-        expect(lastParticipant).toHaveProperty("name");
-        expect(lastParticipant.name).toBe("librarian");
+        const participant = d.addParticipant("librarian");
+        expect(participant).toHaveProperty("name");
+        expect(participant.name).toBe("librarian");
     });
 
     
     it('invariant is added correctly', () => {
         const d = new DALEngine("Library Manager");
-        d.addInvariant("minLength");
-        const lastInvariant = d.invariants[d.invariants.length -1];
-        expect(lastInvariant).toHaveProperty("name");
-        expect(lastInvariant.name).toBe("minLength");
+        const invariant = d.addInvariant("minLength");
+        expect(invariant).toHaveProperty("name");
+        expect(invariant.name).toBe("minLength");
     });
-    
-
     
     it('adds node to graph', () => {
         const d = new DALEngine("Library Manager");

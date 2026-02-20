@@ -15,8 +15,7 @@ class BehavioralControlGraph extends Base{
         this.type = ENGINE_TYPES.BEHAVIORAL_CONTROL_GRAPH;
         this.nodes = [];
     }
-
-
+    
     /**
      * Adds a node to the graph.
      * @param {Behavior} behavior 
