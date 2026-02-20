@@ -15,6 +15,23 @@ class GraphNode extends Base{
         this.goToBehaviors = goToBehaviors;
     }
 
+    /**
+     * Checks if the provided behavior name is a valid
+     * behavior that the control flow selects as a 
+     * result of the this nodes state transformation. i.e.
+     * is this behavior in the goToBehavior list.
+     * @param {String} behaviorName 
+     */
+    isValidGoToBehavior (behaviorName) {
+        for (let i = 0; i < this.goToBehaviors.length; i++) {
+            const behavior = this.goToBehaviors[i];
+            if (behavior.name === behaviorName){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
 export default GraphNode;

@@ -40,6 +40,27 @@ class BehavioralControlGraph extends Base{
                 return node;
             }
         }
+        return null;
+    }
+
+    /**
+     * Given a behavior and next observed behavior, check
+     * if this is a valid transition to make.
+     * @param {String} prevBehaviorName 
+     * @param {String} currBehaviorName 
+     */
+    isSelectableBehavior (prevBehaviorName, currBehaviorName) {
+        const foundNode = this.findNode(prevBehaviorName);
+        if (!foundNode) {
+            console.error("Previous behavior could not be found");
+            // TODO: This is a larger error, think of stratergy for
+            // how to present this.
+            return false;
+        }
+        if (foundNode.isValidGoToBehavior(currBehaviorName)) {
+            return true;
+        }
+        return false;
     }
 }
 

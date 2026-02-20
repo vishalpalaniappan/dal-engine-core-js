@@ -49,6 +49,27 @@ describe('DALEngine', () => {
 
         const foundNode = d.graph.findNode("AcceptBookFromUser");
         expect(foundNode).toStrictEqual(node);
+
+        
+        const isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AddBookToBasket");
+        expect(isSelectable).toBe(true);
+    });
+    
+    it('find node and check if observed behavior is valid transition', () => {
+        const d = new DALEngine("Library Manager");
+        const behavior1 = d.addBehavior("AcceptBookFromUser");
+        const behavior2 = d.addBehavior("AddBookToBasket");
+        const behavior3 = d.addBehavior("AnotherBehavior");
+        const node = d.graph.addNode(behavior1, [behavior2, behavior3])
+        
+        let isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AddBookToBasket");
+        expect(isSelectable).toBe(true);
+
+        isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AnotherBehavior");
+        expect(isSelectable).toBe(true);
+
+        isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AddBookToBaket");
+        expect(isSelectable).toBe(false);
     });
 
 });
