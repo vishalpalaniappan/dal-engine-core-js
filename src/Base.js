@@ -9,6 +9,10 @@ class Base {
     constructor() {
         this.uid = crypto.randomUUID();
     }
+
+    getType() {
+        return this.type;
+    }
 }
 
 export default Base;
