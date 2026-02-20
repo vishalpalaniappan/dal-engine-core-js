@@ -1,4 +1,7 @@
 import Participant from "./Participant";
+import Behavior from "./Behavior";
+import Invariant from "./Invariant";
+import Primitive from "./Primitive";
 
 /**
  * An object representing an engine written in Design
@@ -13,6 +16,9 @@ export class DALEngine {
     constructor(name) {
         this.name = name;
         this.participants = [];
+        this.behaviors = [];
+        this.primitives = [];
+        this.invariants = [];
     }
 
     /**
@@ -22,7 +28,31 @@ export class DALEngine {
         this.participants.push(new Participant(name));
     }
 
-    sayHello() {
-        console.log(`Hello my name is ${this.name}!!`);
+    /**
+     * Adds a behavior.
+     */
+    addBehavior(name) {
+        this.behaviors.push(new Behavior(name));
+    }
+
+    /**
+     * Adds a invariant.
+     */
+    addInvariant(name) {
+        this.invariants.push(new Invariant(name));
+    }
+
+    /**
+     * Adds a invariant.
+     */
+    addInvariant(name) {
+        this.invariants.push(new Invariant(name));
+    }
+
+    /**
+     * Adds a primitive.
+     */
+    addPrimitive(name) {
+        this.primitives.push(new Primitive(name));
     }
 }
