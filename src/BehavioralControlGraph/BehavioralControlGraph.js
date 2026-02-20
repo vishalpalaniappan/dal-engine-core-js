@@ -20,11 +20,11 @@ class BehavioralControlGraph extends Base{
     /**
      * Adds a node to the graph.
      * @param {Behavior} behavior 
-     * @param {Array} gotoBehaviors 
+     * @param {Array} goToBehaviors 
      * @returns 
      */
-    addNode (behavior, gotoBehaviors) {
-        const node = new GraphNode(behavior, gotoBehaviors);
+    addNode (behavior, goToBehaviors) {
+        const node = new GraphNode(behavior, goToBehaviors);
         this.nodes.push(node);
         return node;
     }

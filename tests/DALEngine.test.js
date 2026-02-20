@@ -32,11 +32,14 @@ describe('DALEngine', () => {
         const d = new DALEngine("Library Manager");
         const behavior1 = d.addBehavior("AcceptBookFromUser");
         const behavior2 = d.addBehavior("AddBookToBasket");
+        const goToBehaviors = [behavior2];
 
-        const node = d.graph.addNode(behavior1, [behavior2])
+        const node = d.graph.addNode(behavior1, goToBehaviors)
 
         const nodeType = node.type;
         expect(nodeType).toBe(ENGINE_TYPES.GRAPH_NODE);
+        expect(node.behavior).toStrictEqual(behavior1);
+        expect(node.goToBehaviors).toStrictEqual([behavior2]);
     });
 
 });

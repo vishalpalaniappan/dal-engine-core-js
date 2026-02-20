@@ -8,11 +8,11 @@ class GraphNode extends Base{
      * Initialize the node.
      * @param {String} name 
      */
-    constructor(name, behavior, gotoBehaviors) {
+    constructor(behavior, goToBehaviors) {
         super();
         this.type = ENGINE_TYPES.GRAPH_NODE;
         this.behavior = behavior;
-        this.gotoBehaviors = gotoBehaviors;
+        this.goToBehaviors = goToBehaviors;
     }
 
 }
