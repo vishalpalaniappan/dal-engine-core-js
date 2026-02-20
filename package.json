@@ -1,5 +1,5 @@
 {
-  "name": "dal-core-js-lib",
+  "name": "dal-engine-core-js-lib",
   "version": "0.0.0",
   "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vishalpalaniappan/dal-core-js.git"
+    "url": "git+https://github.com/vishalpalaniappan/dal-engine-core-js.git"
   },
   "author": "Vishal Palaniappan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vishalpalaniappan/dal-core-js/issues"
+    "url": "https://github.com/vishalpalaniappan/dal-engine-core-js/issues"
   },
-  "homepage": "https://github.com/vishalpalaniappan/dal-core-js",
+  "homepage": "https://github.com/vishalpalaniappan/dal-engine-core-js",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.3",
     "rollup": "^4.57.1",
