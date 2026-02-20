@@ -1,4 +1,4 @@
-# dal-core-js
+# dal-engine-core-js
 This repository contains the JavaScript implementation of the Design Abstraction Language (DAL) core. It exposes APIs for constructing, validating, and analyzing formal design specifications.
 
 ## Usage from Package Manager
@@ -33,14 +33,14 @@ npm link
 
 In consuming react application, run:
 ```
-npm link dal-core-js-lib --save
+npm link dal-engine-core-js-lib --save
 ```
 
 You should see the library in node_modules and in package.json.
 
 In react application:
-```
-import { DAL } from "dal-core-js-lib";
+```js
+import { DAL } from "dal-engine-core-js-lib";
 ```
 
 Now you can use the DAL specification defined by the library to perform the relevant operations.
@@ -50,5 +50,5 @@ Now you can use the DAL specification defined by the library to perform the rele
 
 You can use GitHub issues to [report a bug][bug-report] or [request a feature][feature-req].
 
-[bug-report]: https://github.com/vishalpalaniappan/dal-core-js/issues
-[feature-req]: https://github.com/vishalpalaniappan/dal-core-js/issues
+[bug-report]: https://github.com/vishalpalaniappan/dal-engine-core-js/issues
+[feature-req]: https://github.com/vishalpalaniappan/dal-engine-core-js/issues
