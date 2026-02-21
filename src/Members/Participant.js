@@ -5,32 +5,23 @@ import Invariant from "./Invariant";
  * Class representing a participant in the design.
  */
 class Participant extends Base {
-
     /**
      * Initialize the semantic participant.
      * @param {String} name
      * @param args
      */
     constructor (args) {
-
         super();
         this.type = ENGINE_TYPES.INVARIANT;
         this.invariants = [];
         this.invariantViolated = false;
         if (typeof args === "object" && args !== null) {
-
             if (Object.hasOwn(args, "uid")) {
-
                 this.loadParticipantFromJSON(args);
-
             } else {
-
                 this.name = args.name;
-
             }
-
         }
-
     }
 
     /**
@@ -38,21 +29,13 @@ class Participant extends Base {
      * @param {Object} participantJSON
      */
     loadParticipantFromJSON (participantJSON) {
-
         for (const [key, value] of Object.entries(participantJSON)) {
-
             if (key === "invariants") {
-
                 value.forEach(node => this.invariants.push(new Invariant(node)));
-
             } else {
-
                 this[key] = participantJSON[key];
-
             }
-
         };
-
     }
 
     /**
@@ -61,10 +44,8 @@ class Participant extends Base {
      * @returns
      */
     addInvariant (invariant) {
-
         this.invariants.push(invariant);
         return invariant;
-
     }
 
     /**
@@ -72,32 +53,23 @@ class Participant extends Base {
      * @param {*} value
      */
     setValue (value) {
-
         this.value = value;
-
     }
 
     /**
      * Enforces the particiants invariants.
      */
     enforceInvariants () {
-
         this.invariantViolated = false
         this.invariantViolationCount = 0;
         for (let i = 0; i < this.invariants.length; i++) {
-
             if (this.invariants[i].evaluate(this.value)) {
-
                 this.invariantViolated = true;
                 this.invariantViolationCount++;
-
             }
-
         }
         return this.invariantViolated;
-
     }
-
 }
 
 export default Participant;

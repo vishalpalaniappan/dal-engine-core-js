@@ -52,7 +52,7 @@ export default [
             "no-unused-vars": "warn",
             "object-curly-spacing": "warn",
             "operator-linebreak": "off",
-            "padded-blocks": "warn",
+            "padded-blocks": "off",
             quotes: ["warn", "double", {avoidEscape: true}],
             "semi-spacing": "warn",
 

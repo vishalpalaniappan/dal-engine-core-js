@@ -5,9 +5,7 @@ import {describe, expect, it} from "vitest";
 import {DALEngine} from "../src/DALEngine.js";
 
 describe("invariantTests", () => {
-
     it("test invariant directly through participants", async () => {
-
         let d = new DALEngine({name: "Library Manager"});
 
         // Create book participant and add invariant
@@ -45,12 +43,10 @@ describe("invariantTests", () => {
         book.enforceInvariants();
         expect(book.invariantViolated).toBe(false);
         expect(book.invariantViolationCount).toBe(0);
-
     });
 
 
     it("test invariant violaton of behavior", async () => {
-
         let d = new DALEngine({name: "Library Manager"});
 
         // Create book participant and add invariant to it
@@ -93,7 +89,5 @@ describe("invariantTests", () => {
         // Write to file for inspection
         const filePath = resolve(__dirname, "./temp/temp.json")
         await writeFile(filePath, d.serialize())
-
     });
-
 })
