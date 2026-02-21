@@ -113,7 +113,7 @@ describe("DALEngine", () => {
         d.graph.addNode(behavior2, []);
         d.graph.addNode(behavior3, []);
 
-        const filePath = resolve(__dirname, "./temp/serializeTemp.json")
+        const filePath = resolve(__dirname, "./temp/inspectSerializeTemp.json")
         await writeFile(filePath, d.serialize())
 
         d = new DALEngine({name: "Library Manager"});
