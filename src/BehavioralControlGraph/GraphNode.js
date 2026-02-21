@@ -17,9 +17,8 @@ class GraphNode extends Base{
             if (Object.hasOwn(args, 'uid')) {
                 this.loadNodeFromJSON(args);
             } else {
-                for (const [key, value] of Object.entries(args)) {
-                    this[key] = value;
-                }
+                this.behavior = args.behavior;
+                this.goToBehaviors = args.goToBehaviors;
             }
         }
     }

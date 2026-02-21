@@ -15,9 +15,7 @@ class Invariant extends Base{
             if (Object.hasOwn(args, 'uid')) {
                 this.loadInvariantFromJSON(args);
             } else {
-                for (const [key, value] of Object.entries(args)) {
-                    this[key] = value;
-                }
+                this.name = args.name;
             }
         }
     }
