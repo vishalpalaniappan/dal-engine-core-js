@@ -46,6 +46,7 @@ class GraphNode extends Base {
      * result of the this nodes state transformation. i.e.
      * is this behavior in the goToBehavior list.
      * @param {String} behaviorName
+     * @returns {Boolean}
      */
     isValidGoToBehavior (behaviorName) {
         for (let i = 0; i < this.goToBehaviors.length; i++) {
