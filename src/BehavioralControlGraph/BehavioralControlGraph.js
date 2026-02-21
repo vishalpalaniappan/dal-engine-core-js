@@ -1,7 +1,6 @@
 import Base from "../Base";
 import InvalidTransitionError from "../Errors/InvalidTransitionError";
 import UnknownBehaviorError from "../Errors/UnknownBehaviorError";
-import Behavior from "../Members/Behavior";
 import ENGINE_TYPES from "../TYPES";
 import GraphNode from "./GraphNode";
 
@@ -60,7 +59,8 @@ class BehavioralControlGraph extends Base {
     /**
      * Finds the given node given the behavior name.
      * @param {String} behaviorName
-     * @throws {UnknownBehaviorError} Raised when the provided behavior does not exist in the graph.
+     * @throws {UnknownBehaviorError} Raised when the provided behavior
+     * does not exist in the graph.
      * @returns
      */
     findNode (behaviorName) {
@@ -96,7 +96,8 @@ class BehavioralControlGraph extends Base {
      * Check if the observed behavior is a valid transition
      * given the current node.
      * @param {String} nextBehaviorName
-     * @throws {InvalidTransitionError} Raised when the provided behavior is not a valid transition.
+     * @throws {InvalidTransitionError} Raised when the provided
+     * behavior is not a valid transition.
      */
     goToBehavior (nextBehaviorName) {
         if (this.currentNode.isValidGoToBehavior(nextBehaviorName)) {
