@@ -29,13 +29,37 @@ class Invariant extends Base{
         for (const [key, value] of Object.entries(invariantJSON)) {
             this[key] = invariantJSON[key];
         };
+        // Reset these because they are set by the execution
+        this.invariantViolated = null;
+        this.value = null;
     }
 
     /**
      * Evaluate the invariant.
+     * @param {*} value
+     * @returns {Boolean}
      */
-    evaluate() {
-        console.log("Evaluating the invariant");
+    evaluate(value) {
+        this.invariantViolated = false;
+        if (this.rule.type === "minLength"){
+            this.enforceMinLength(value);
+        }
+        return this.invariantViolated;
+    }
+
+    /**
+     * Enforce the string min length invariant
+     */
+    enforceMinLength(value) {
+        if ("keys" in this.rule) {
+            for (let i = 0; i < this.rule["keys"].length; i++) {
+                console.log(this.rule["keys"][i], value)
+                value = value[this.rule["keys"][i]];
+            }
+        };
+        if (value === null || typeof value !== "string" || value.length < this.rule.value) {
+            this.invariantViolated = true;
+        }
     }
 }
 

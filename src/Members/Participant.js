@@ -55,12 +55,18 @@ class Participant extends Base{
     }
 
     /**
-     * Enforces the specified invariants.
+     * Enforces the particiants invariants.
      */
     enforceInvariants() {
+        this.violatedInvariant = false
+        this.invariantViolationCount = 0;
         for (let i = 0; i < this.invariants.length; i++) {
             const invariant = this.invariants[i];
-            invariant.evaluate(this.value);
+            const violatedInvariant = invariant.evaluate(this.value);
+            if (violatedInvariant) {
+                this.violatedInvariant = true;
+                this.invariantViolationCount++;
+            }
         }
     }
 }
