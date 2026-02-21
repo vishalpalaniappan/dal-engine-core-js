@@ -89,7 +89,7 @@ describe('DALEngine', () => {
         expect(lastInvariant).toBe(invariant);
     });
 
-    it("write to file and load from file", async  () => {
+    it("serialize to file and deseralize from file", async  () => {
         let d = new DALEngine({name:"Library Manager"});
         const book = d.createParticipant({name:"book"});
         const invariant = d.createInvariant({name:"minLength"});
