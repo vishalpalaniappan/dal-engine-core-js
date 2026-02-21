@@ -19,6 +19,20 @@ export class DALEngine {
     }
 
     /**
+     * Exports the behavioral control graph to JSON.
+     */
+    exportGraphToJSON () {
+
+    }
+
+    /**
+     * Import the behavioral control graph from JSON.
+     */
+    importGraphFromJSON() {
+
+    }
+
+    /**
      * Creates a participant.
      */
     createParticipant(name) {
