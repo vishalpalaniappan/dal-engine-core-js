@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { DALEngine } from '../src/DALEngine.js';
+import { writeFile, readFile, unlink } from 'fs/promises'
+import { resolve } from 'path'
 import ENGINE_TYPES from '../src/TYPES.js';
 import InvalidTransitionError from '../src/Errors/InvalidTransitionError.js';
 import UnknownBehaviorError from '../src/Errors/UnknownBehaviorError.js';
@@ -87,7 +89,29 @@ describe('DALEngine', () => {
         expect(lastInvariant).toBe(invariant);
     });
 
+    it("write to file and load from file", async  () => {
+        let d = new DALEngine("Library Manager");
+        const book = d.createParticipant("book");
+        const invariant = d.createInvariant("minLength");
+        book.addInvariant(invariant);
 
-    
+        const behavior1 = d.createBehavior("AcceptBookFromUser");
+        behavior1.addParticpant(book);
+        const behavior2 = d.createBehavior("AddBookToBasket");
+        const behavior3 = d.createBehavior("AnotherBehavior");
+        d.graph.addNode(behavior1, [behavior2, behavior3]);
+        d.graph.addNode(behavior2, []);
+        d.graph.addNode(behavior3, []);
+
+        const filePath = resolve(__dirname, './temp.json')
+        await writeFile(filePath, d.serialize())
+
+        d = new DALEngine("Library Manager");
+        d.deserialize(await readFile(filePath, 'utf-8'));
+        expect(d.graph.nodes.length).toBe(3);
+
+        // Intentionally not cleaning up the file because I want to inspect
+        // await unlink(filePath)
+    });
 
 });

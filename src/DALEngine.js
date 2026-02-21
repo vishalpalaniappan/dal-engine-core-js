@@ -19,17 +19,18 @@ export class DALEngine {
     }
 
     /**
-     * Exports the behavioral control graph to JSON.
+     * Exports the behavioral control graph to JSON text.
      */
-    exportGraphToJSON () {
-
+    serialize () {
+        return JSON.stringify(this.graph);
     }
 
     /**
-     * Import the behavioral control graph from JSON.
+     * Import the behavioral control graph from JSON text.
      */
-    importGraphFromJSON() {
-
+    deserialize(jsonText) {
+        this.graph = new BehavioralControlGraph();
+        this.graph.loadGraphFromJSON(JSON.parse(jsonText));
     }
 
     /**

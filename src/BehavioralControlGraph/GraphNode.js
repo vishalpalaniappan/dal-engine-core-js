@@ -13,6 +13,26 @@ class GraphNode extends Base{
         this.type = ENGINE_TYPES.GRAPH_NODE;
         this.behavior = behavior;
         this.goToBehaviors = goToBehaviors;
+    }    
+    
+    /**
+     * Loads the nodes from a JSON file
+     * @param {Object} nodesJSON
+     */
+    loadNodeFromJSON (nodesJSON) {
+        const keys = Object.keys(nodesJSON);
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            if (key === "behavior") {
+                // Load behavior manually
+                console.log("Loading behaviors")
+            } else if (key === "goToBehaviors") {
+                console.log("LOading goto behaviors");
+                // Load graph manually
+            } else {
+                this[key] = nodesJSON[key];
+            }
+        }
     }
 
     /**

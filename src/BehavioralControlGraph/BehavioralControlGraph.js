@@ -19,6 +19,25 @@ class BehavioralControlGraph extends Base{
         this.nodes = [];
         this.currentNode = null;
     }
+
+    /**
+     * Loads the graph from a JSON file
+     * @param {Object} graphJson
+     */
+    loadGraphFromJSON (graphJson) {
+        const keys = Object.keys(graphJson);
+        for (let i = 0; i < keys.length; i++) {
+            const key = keys[i];
+            if (key === "nodes") {
+                for (const node in graphJson[key]) {
+                    this.nodes.push(new GraphNode());
+                    this.nodes[this.nodes.length - 1].loadNodeFromJSON(node)
+                }
+            } else {
+                this[key] = graphJson[key];
+            }
+        }
+    }
     
     /**
      * Adds a node to the graph.
