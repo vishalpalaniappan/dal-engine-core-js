@@ -3,6 +3,7 @@ import GraphNode from "./GraphNode";
 import ENGINE_TYPES from "../TYPES";
 import Behavior from "../Members/Behavior";
 import InvalidTransitionError from "../Errors/InvalidTransitionError";
+import UnknownBehaviorError from "../Errors/UnknownBehaviorError";
 
 /**
  * Class representing the behavioral control graph.
@@ -16,6 +17,7 @@ class BehavioralControlGraph extends Base{
         super();
         this.type = ENGINE_TYPES.BEHAVIORAL_CONTROL_GRAPH;
         this.nodes = [];
+        this.currentNode = null;
     }
     
     /**
@@ -30,36 +32,53 @@ class BehavioralControlGraph extends Base{
         return node;
     }
 
+
     /**
-     * Finds the node in the graph given the behavior.
+     * Finds the given node given the behavior name.
      * @param {String} behaviorName 
+     * @throws {UnknownBehaviorError}
+     * @returns 
      */
     findNode (behaviorName) {
         for (let i = 0; i < this.nodes.length; i++) {
-            const node = this.nodes[i];
-            const behavior = node.behavior;
+            const behavior = this.nodes[i].behavior;
             if (behavior.name === behaviorName) {
-                return node;
+                return this.nodes[i];
             }
         }
-        return null;
+        throw new UnknownBehaviorError(behaviorName);
     }
 
     /**
-     * Given a behavior and next observed behavior, check
-     * if this is a valid transition to make.
-     * @param {String} prevBehaviorName 
-     * @param {String} currBehaviorName 
+     * Sets the active node given the behavior name.
+     * The execution provides the next observed
+     * behavior and the active node indicates if
+     * if it is a valid transition.
+     * 
+     * 
+     * @param {String} behaviorName 
      */
-    isSelectableBehavior (prevBehaviorName, currBehaviorName) {
-        const foundNode = this.findNode(prevBehaviorName);
-        if (!foundNode) {
-            throw new InvalidTransitionError(prevBehaviorName, currBehaviorName);
-        }
-        if (foundNode.isValidGoToBehavior(currBehaviorName)) {
-            return true;
+    setCurrentBehavior (behaviorName) {
+        const node = this.findNode(behaviorName);
+        /**
+         * TODO: Ensure it is atomic because the execution
+         * will only set a behavior when its the first one.
+         * It will walk using goToBehavior after that.
+         */
+        this.currentNode = node;
+    }
+
+    /**
+     * Check if the observed behavior is a valid transition
+     * given the current node.
+     * @param {String} nextBehaviorName 
+     * @throws {InvalidTransitionError} Raised when the provided behavior is not a valid transition.
+     */
+    goToBehavior (nextBehaviorName) {
+        if (this.currentNode.isValidGoToBehavior(nextBehaviorName)) {
+            this.currentNode = this.findNode(nextBehaviorName);
         } else {
-            throw new InvalidTransitionError(prevBehaviorName, currBehaviorName);
+            throw new InvalidTransitionError(this.currentNode.behavior.name, nextBehaviorName);
         }
     }
 }

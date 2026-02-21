@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { DALEngine } from '../src/DALEngine.js';
 import ENGINE_TYPES from '../src/TYPES.js';
 import InvalidTransitionError from '../src/Errors/InvalidTransitionError.js';
+import UnknownBehaviorError from '../src/Errors/UnknownBehaviorError.js';
 
 describe('DALEngine', () => {
     it('sets the name correctly', () => {
@@ -48,9 +49,6 @@ describe('DALEngine', () => {
 
         const foundNode = d.graph.findNode("AcceptBookFromUser");
         expect(foundNode).toStrictEqual(node);
-        
-        const isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AddBookToBasket");
-        expect(isSelectable).toBe(true);
     });
     
     it('find node and check if observed behavior is valid transition', () => {
@@ -58,20 +56,37 @@ describe('DALEngine', () => {
         const behavior1 = d.addBehavior("AcceptBookFromUser");
         const behavior2 = d.addBehavior("AddBookToBasket");
         const behavior3 = d.addBehavior("AnotherBehavior");
-        const node = d.graph.addNode(behavior1, [behavior2, behavior3])
-        
-        let isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AddBookToBasket");
-        expect(isSelectable).toBe(true);
+        d.graph.addNode(behavior1, [behavior2, behavior3])
+        d.graph.addNode(behavior2, [])
+        d.graph.addNode(behavior3, [])
 
-        isSelectable = d.graph.isSelectableBehavior("AcceptBookFromUser","AnotherBehavior");
-        expect(isSelectable).toBe(true);
-
+        // Misspell behavior name to trigger unknown behavior error
         expect(() => {
-            d.graph.isSelectableBehavior("AcceptBookFromser","AddBookToBasket");
+            d.graph.setCurrentBehavior("AcceptBookromUser");
+        }).toThrow(UnknownBehaviorError);
+        
+        d.graph.setCurrentBehavior("AcceptBookFromUser");
+        expect(d.graph.currentNode.behavior).toBe(behavior1);
+
+        d.graph.goToBehavior("AddBookToBasket")
+        expect(d.graph.currentNode.behavior).toBe(behavior2);
+        
+        // Reset current behavior so transition is valid
+        d.graph.setCurrentBehavior("AcceptBookFromUser");
+        d.graph.goToBehavior("AnotherBehavior")
+        expect(d.graph.currentNode.behavior).toBe(behavior3);
+
+        // Raises error because current behavior is "AnotherBehavior"
+        // and it does not transition to itself.
+        expect(() => {
+            d.graph.goToBehavior("AnotherBehavior")
         }).toThrow(InvalidTransitionError);
 
+        // Reset the current behavior and then go to a behavior
+        // which is misspelled and expect an invalid transition error
         expect(() => {
-            d.graph.isSelectableBehavior("AcceptBookFromUser","ookToBasket");
+            d.graph.setCurrentBehavior("AcceptBookFromUser");
+            d.graph.goToBehavior("AddBookToasket")
         }).toThrow(InvalidTransitionError);
     });
 
