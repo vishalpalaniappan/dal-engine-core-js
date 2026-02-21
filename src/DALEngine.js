@@ -1,7 +1,6 @@
 import Participant from "./Members/Participant";
 import Behavior from "./Members/Behavior";
 import Invariant from "./Members/Invariant";
-import Primitive from "./Members/Primitive";
 import BehavioralControlGraph from "./BehavioralControlGraph/BehavioralControlGraph";
 
 /**
