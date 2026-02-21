@@ -2,17 +2,23 @@
  * Base class for all objects in design.
  */
 class Base {
+
     /**
      * Initialize the base class.
-     * @param {String} name 
+     * @param {String} name
      */
-    constructor() {
+    constructor () {
+
         this.uid = crypto.randomUUID();
+
     }
 
-    getType() {
+    getType () {
+
         return this.type;
+
     }
+
 }
 
 export default Base;

@@ -1,66 +1,82 @@
-import Participant from "./Members/Participant";
+import BehavioralControlGraph from "./BehavioralControlGraph/BehavioralControlGraph";
 import Behavior from "./Members/Behavior";
 import Invariant from "./Members/Invariant";
-import BehavioralControlGraph from "./BehavioralControlGraph/BehavioralControlGraph";
+import Participant from "./Members/Participant";
 
 /**
  * An object representing an engine written in Design
- * abstraction language. It exposes functions 
+ * abstraction language. It exposes functions
  * configure the engine through the DAL specification.
- * 
+ *
  * The execution of an program instrumented with the
  * same design be used to step through the design
  * while the engine automatically debugs the execution.
  */
 export class DALEngine {
-    constructor(args) {
+
+    constructor (args) {
+
         this.graph = new BehavioralControlGraph();
         for (const [key, value] of Object.entries(args)) {
+
             this[key] = value;
+
         }
+
     }
 
     /**
      * Exports the behavioral control graph to JSON text.
      */
     serialize () {
+
         return JSON.stringify(this.graph);
+
     }
 
     /**
      * Import the behavioral control graph from JSON text.
      * @param {String} jsonText
      */
-    deserialize(jsonText) {
+    deserialize (jsonText) {
+
         this.graph = new BehavioralControlGraph();
         this.graph.loadGraphFromJSON(JSON.parse(jsonText));
+
     }
 
     /**
      * Creates a participant.
      * @param {Object} args
      */
-    createParticipant(args) {
-        //TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
-        //Perhaps it is better to do that in the class itself. 
+    createParticipant (args) {
+
+        // TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
+        // Perhaps it is better to do that in the class itself.
         return new Participant(args);
+
     }
 
     /**
      * Creates a behavior.
      * @param {Object} args
      */
-    createBehavior(args) {
-        //TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
+    createBehavior (args) {
+
+        // TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
         return new Behavior(args);
+
     }
 
     /**
      * Creates an invariant.
      * @param {Object} args
      */
-    createInvariant(args) {
-        //TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
+    createInvariant (args) {
+
+        // TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
         return new Invariant(args);
+
     }
+
 }
