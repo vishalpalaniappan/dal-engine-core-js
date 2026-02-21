@@ -113,7 +113,7 @@ describe("DALEngine", () => {
         d.graph.addNode(behavior2, []);
         d.graph.addNode(behavior3, []);
 
-        const filePath = resolve(__dirname, "./temp/temp.json")
+        const filePath = resolve(__dirname, "./temp/serializeTemp.json")
         await writeFile(filePath, d.serialize())
 
         d = new DALEngine({name: "Library Manager"});
@@ -124,7 +124,7 @@ describe("DALEngine", () => {
         // await unlink(filePath)
 
         // This is a temporary file I create for my own inspection
-        const filePath2 = resolve(__dirname, "./temp/temp2.json")
+        const filePath2 = resolve(__dirname, "./temp/inspectDeseralizeTemp.json")
         await writeFile(filePath2, d.serialize())
     });
 });

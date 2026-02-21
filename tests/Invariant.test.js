@@ -87,7 +87,7 @@ describe("invariantTests", () => {
         expect(behavior1.invalidWorldState).toBe(true);
 
         // Write to file for inspection
-        const filePath = resolve(__dirname, "./temp/temp.json")
+        const filePath = resolve(__dirname, "./temp/invariantBehaviorTemp.json")
         await writeFile(filePath, d.serialize())
     });
 })
