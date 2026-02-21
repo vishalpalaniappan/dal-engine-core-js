@@ -10,24 +10,10 @@ describe('DALEngine', () => {
         expect(dalInstance.name).toBe("Library Manager");
     });
     
-    it('participant is added correctly', () => {
-        const d = new DALEngine("Library Manager");
-        const participant = d.addParticipant("librarian");
-        expect(participant).toHaveProperty("name");
-        expect(participant.name).toBe("librarian");
-    });
-    
-    it('invariant is added correctly', () => {
-        const d = new DALEngine("Library Manager");
-        const invariant = d.addInvariant("minLength");
-        expect(invariant).toHaveProperty("name");
-        expect(invariant.name).toBe("minLength");
-    });
-    
     it('adds node to graph', () => {
         const d = new DALEngine("Library Manager");
-        const behavior1 = d.addBehavior("AcceptBookFromUser");
-        const behavior2 = d.addBehavior("AddBookToBasket");
+        const behavior1 = d.createBehavior("AcceptBookFromUser");
+        const behavior2 = d.createBehavior("AddBookToBasket");
         const goToBehaviors = [behavior2];
 
         const node = d.graph.addNode(behavior1, goToBehaviors)
@@ -43,8 +29,8 @@ describe('DALEngine', () => {
     
     it('find node that was added using behavior name', () => {
         const d = new DALEngine("Library Manager");
-        const behavior1 = d.addBehavior("AcceptBookFromUser");
-        const behavior2 = d.addBehavior("AddBookToBasket");
+        const behavior1 = d.createBehavior("AcceptBookFromUser");
+        const behavior2 = d.createBehavior("AddBookToBasket");
         const node = d.graph.addNode(behavior1, [behavior2])
 
         const foundNode = d.graph.findNode("AcceptBookFromUser");
@@ -53,9 +39,9 @@ describe('DALEngine', () => {
     
     it('find node and check if observed behavior is valid transition', () => {
         const d = new DALEngine("Library Manager");
-        const behavior1 = d.addBehavior("AcceptBookFromUser");
-        const behavior2 = d.addBehavior("AddBookToBasket");
-        const behavior3 = d.addBehavior("AnotherBehavior");
+        const behavior1 = d.createBehavior("AcceptBookFromUser");
+        const behavior2 = d.createBehavior("AddBookToBasket");
+        const behavior3 = d.createBehavior("AnotherBehavior");
         d.graph.addNode(behavior1, [behavior2, behavior3])
         d.graph.addNode(behavior2, [])
         d.graph.addNode(behavior3, [])

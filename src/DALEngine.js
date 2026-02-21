@@ -17,45 +17,26 @@ export class DALEngine {
     constructor(name) {
         this.name = name;
         this.graph = new BehavioralControlGraph();
-        this.participants = [];
-        this.behaviors = [];
-        this.primitives = [];
-        this.invariants = [];
     }
 
     /**
-     * Adds a participant type.
+     * Creates a participant.
      */
-    addParticipant(name) {
-        const participant = new Participant(name);
-        this.participants.push(participant);
-        return participant;
+    createParticipant(name) {
+        return new Participant(name);
     }
 
     /**
-     * Adds a behavior.
+     * Creates a behavior.
      */
-    addBehavior(name) {
-        const behavior = new Behavior(name);
-        this.behaviors.push(behavior);
-        return behavior;
+    createBehavior(name) {
+        return new Behavior(name);
     }
 
     /**
-     * Adds a invariant.
+     * Creates an invariant.
      */
-    addInvariant(name) {
-        const invariant = new Invariant(name);
-        this.invariants.push(invariant);
-        return invariant;
-    }
-
-    /**
-     * Adds a primitive.
-     */
-    addPrimitive(name) {
-        const primitive = new Primitive(name);
-        this.primitives.push(primitive);
-        return primitive;
+    createInvariant(name) {
+        return new Invariant(name);
     }
 }
