@@ -17,10 +17,11 @@ class Behavior extends Base{
     }
 
     /**
-     * Add a participant to the behavior.
+     * Adds a participant to the behavior.
+     * @param {Participant} participant 
+     * @returns 
      */
-    addParticpant (name) {
-        const participant = new Participant(name);
+    addParticpant (participant) {
         this.participants.push(participant);
         return participant;
     }

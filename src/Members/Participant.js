@@ -13,13 +13,15 @@ class Participant extends Base{
         super();
         this.name = name;
         this.type = ENGINE_TYPES.PARTICIPANT;
+        this.invariants = [];
     }
 
     /**
-     * Adds an invariant to a participant
+     * Adds an invariant to the participant.
+     * @param {Invariant} invariant 
+     * @returns 
      */
-    addInvariant(name) {
-        const invariant = new Invariant(name);
+    addInvariant(invariant) {
         this.invariants.push(invariant);
         return invariant;
     }

@@ -76,4 +76,18 @@ describe('DALEngine', () => {
         }).toThrow(InvalidTransitionError);
     });
 
+    it('add invariant to participant', () => {
+        const d = new DALEngine("Library Manager");
+        const book = d.createParticipant("book");
+        const invariant = d.createInvariant("minLength");
+
+        book.addInvariant(invariant);
+
+        const lastInvariant = book.invariants[book.invariants.length - 1];
+        expect(lastInvariant).toBe(invariant);
+    });
+
+
+    
+
 });
