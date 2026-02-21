@@ -20,7 +20,6 @@ class BehavioralControlGraph extends Base{
         if (typeof args === "object" && args !== null) {
             if (Object.hasOwn(args, 'uid')) {
                 this.loadGraphFromJSON(args);
-                return;
             } else {
                 for (const [key, value] of Object.entries(args)) {
                     this[key] = value;
