@@ -59,7 +59,7 @@ class BehavioralControlGraph extends Base{
     /**
      * Finds the given node given the behavior name.
      * @param {String} behaviorName 
-     * @throws {UnknownBehaviorError}
+     * @throws {UnknownBehaviorError} Raised when the provided behavior does not exist in the graph.
      * @returns 
      */
     findNode (behaviorName) {
