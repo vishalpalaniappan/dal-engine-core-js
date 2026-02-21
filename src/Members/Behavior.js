@@ -13,6 +13,7 @@ class Behavior extends Base{
         super();
         this.type = ENGINE_TYPES.BEHAVIOR;
         this.participants = [];
+        this.invalidWorldState = false;
         if (typeof args === "object" && args !== null) {
             if (Object.hasOwn(args, 'uid')) {
                 this.loadBehaviorFromJSON(args);
@@ -44,6 +45,24 @@ class Behavior extends Base{
     addParticpant (participant) {
         this.participants.push(participant);
         return participant;
+    }
+
+    /**
+     * Set the participant value.
+     * @param {String} participantName 
+     * @param {*} value 
+     */
+    setParticipantValue(participantName, value) {
+        for (let i = 0; i < this.participants.length; i++) {
+            const participant = this.participants[i];
+            if (participant.name === participantName) {
+                participant.value = value;
+                const violation = participant.enforceInvariants();
+                if (violation) {
+                    this.invalidWorldState = true;
+                }
+            }
+        }
     }
 }
 

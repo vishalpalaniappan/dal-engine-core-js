@@ -11,6 +11,7 @@ class Invariant extends Base{
     constructor(args) {
         super();
         this.type = ENGINE_TYPES.INVARIANT;
+        this.invariantViolated = false
         if (typeof args === "object" && args !== null) {
             if (Object.hasOwn(args, 'uid')) {
                 this.loadInvariantFromJSON(args);

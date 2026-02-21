@@ -13,6 +13,7 @@ class Participant extends Base{
         super();
         this.type = ENGINE_TYPES.INVARIANT;
         this.invariants = [];
+        this.invariantViolated = false;
         if (typeof args === "object" && args !== null) {
             if (Object.hasOwn(args, 'uid')) {
                 this.loadParticipantFromJSON(args);
@@ -58,16 +59,15 @@ class Participant extends Base{
      * Enforces the particiants invariants.
      */
     enforceInvariants() {
-        this.violatedInvariant = false
+        this.invariantViolated = false
         this.invariantViolationCount = 0;
         for (let i = 0; i < this.invariants.length; i++) {
-            const invariant = this.invariants[i];
-            const violatedInvariant = invariant.evaluate(this.value);
-            if (violatedInvariant) {
-                this.violatedInvariant = true;
+            if (this.invariants[i].evaluate(this.value)) {
+                this.invariantViolated = true;
                 this.invariantViolationCount++;
             }
         }
+        return this.invariantViolated;
     }
 }
 
