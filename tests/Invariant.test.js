@@ -64,6 +64,7 @@ describe('invariantTests', () => {
         // Create behavior and participant
         const behavior1 = d.createBehavior({name:"AcceptBookFromUser"});
         behavior1.addParticpant(book);
+        d.graph.addNode(behavior1, []);
 
         // Add value that respects invariant and expect valid world state
         behavior1.setParticipantValue("book", {
