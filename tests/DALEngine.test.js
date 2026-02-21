@@ -92,7 +92,16 @@ describe('DALEngine', () => {
     it("serialize to file and deseralize from file", async  () => {
         let d = new DALEngine({name:"Library Manager"});
         const book = d.createParticipant({name:"book"});
-        const invariant = d.createInvariant({name:"minLength"});
+        const invariant = d.createInvariant(
+            {
+                "name": "MinLengthConstraint",
+                "rule": {
+                    "type":"minLength",
+                    "keys": ["value","name"],
+                    "value": 1
+                }
+            }
+        );
         book.addInvariant(invariant);
 
         const behavior1 = d.createBehavior({name:"AcceptBookFromUser"});

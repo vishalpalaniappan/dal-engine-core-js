@@ -45,6 +45,24 @@ class Participant extends Base{
         this.invariants.push(invariant);
         return invariant;
     }
+
+    /**
+     * Sets the value of the participant.
+     * @param {*} value 
+     */
+    setValue(value) {
+        this.value = value;
+    }
+
+    /**
+     * Enforces the specified invariants.
+     */
+    enforceInvariants() {
+        for (let i = 0; i < this.invariants.length; i++) {
+            const invariant = this.invariants[i];
+            invariant.evaluate(this.value);
+        }
+    }
 }
 
 export default Participant;

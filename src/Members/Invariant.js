@@ -16,6 +16,7 @@ class Invariant extends Base{
                 this.loadInvariantFromJSON(args);
             } else {
                 this.name = args.name;
+                this.rule = args.rule;
             }
         }
     }
@@ -28,6 +29,13 @@ class Invariant extends Base{
         for (const [key, value] of Object.entries(invariantJSON)) {
             this[key] = invariantJSON[key];
         };
+    }
+
+    /**
+     * Evaluate the invariant.
+     */
+    evaluate() {
+        console.log("Evaluating the invariant");
     }
 }
 
