@@ -29,6 +29,7 @@ export class DALEngine {
 
     /**
      * Import the behavioral control graph from JSON text.
+     * @param {String} jsonText
      */
     deserialize(jsonText) {
         this.graph = new BehavioralControlGraph();
@@ -37,22 +38,29 @@ export class DALEngine {
 
     /**
      * Creates a participant.
+     * @param {Object} args
      */
-    createParticipant(name) {
-        return new Participant(name);
+    createParticipant(args) {
+        //TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
+        //Perhaps it is better to do that in the class itself. 
+        return new Participant(args);
     }
 
     /**
      * Creates a behavior.
+     * @param {Object} args
      */
-    createBehavior(name) {
-        return new Behavior(name);
+    createBehavior(args) {
+        //TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
+        return new Behavior(args);
     }
 
     /**
      * Creates an invariant.
+     * @param {Object} args
      */
-    createInvariant(name) {
-        return new Invariant(name);
+    createInvariant(args) {
+        //TODO: Validate that the args have the necessary keys and raise custom error if they are missing.
+        return new Invariant(args);
     }
 }
