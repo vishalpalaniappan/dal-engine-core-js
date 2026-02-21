@@ -29,7 +29,7 @@ class Invariant extends Base {
      */
     loadInvariantFromJSON (invariantJSON) {
         for (const [key, value] of Object.entries(invariantJSON)) {
-            this[key] = invariantJSON[key];
+            this[key] = value;
         };
         // Reset these because they are set by the execution
         this.invariantViolated = null;

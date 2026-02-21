@@ -58,6 +58,7 @@ class Participant extends Base {
 
     /**
      * Enforces the particiants invariants.
+     * @returns {Boolean}
      */
     enforceInvariants () {
         this.invariantViolated = false
