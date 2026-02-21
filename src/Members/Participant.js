@@ -9,11 +9,33 @@ class Participant extends Base{
      * Initialize the semantic participant.
      * @param {String} name 
      */
-    constructor(name) {
+    constructor(args) {
         super();
-        this.name = name;
-        this.type = ENGINE_TYPES.PARTICIPANT;
+        this.type = ENGINE_TYPES.INVARIANT;
         this.invariants = [];
+        if (typeof args === "object" && args !== null) {
+            if (Object.hasOwn(args, 'uid')) {
+                this.loadParticipantFromJSON(args);
+            } else {
+                for (const [key, value] of Object.entries(args)) {
+                    this[key] = value;
+                }
+            }
+        }
+    }
+
+    /**
+     * Loads the participant from a JSON object.
+     * @param {Object} participantJSON
+     */
+    loadParticipantFromJSON (participantJSON) {
+        for (const [key, value] of Object.entries(participantJSON)) {
+            if (key === "invariants") {
+                value.forEach(node => this.invariants.push(new Invariant(node)));
+            } else {
+                this[key] = participantJSON[key];
+            }
+        };
     }
 
     /**

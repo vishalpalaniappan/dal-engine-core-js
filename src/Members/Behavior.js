@@ -9,11 +9,34 @@ class Behavior extends Base{
      * Initialize the Behavior.
      * @param {String} name 
      */
-    constructor(name) {
+    constructor(args) {
         super();
-        this.name = name;
         this.type = ENGINE_TYPES.BEHAVIOR;
         this.participants = [];
+        if (typeof args === "object" && args !== null) {
+            if (Object.hasOwn(args, 'uid')) {
+                this.loadBehaviorFromJSON(args);
+                return;
+            } else {
+                for (const [key, value] of Object.entries(args)) {
+                    this[key] = value;
+                }
+            }
+        }
+    }
+
+    /**
+     * Loads the behavior from a JSON object.
+     * @param {Object} behaviorJSON
+     */
+    loadBehaviorFromJSON (behaviorJSON) {
+        for (const [key, value] of Object.entries(behaviorJSON)) {
+            if (key === "participants") {
+                value.forEach(node => this.participants.push(new Participant(node)));
+            } else {
+                this[key] = behaviorJSON[key];
+            }
+        };
     }
 
     /**

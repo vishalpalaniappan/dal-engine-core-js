@@ -1,5 +1,6 @@
 import Base from "../Base";
 import ENGINE_TYPES from "../TYPES";
+import Behavior from "../Members/Behavior";
 /**
  * Class representing a behavioral control graph node.
  */
@@ -8,31 +9,35 @@ class GraphNode extends Base{
      * Initialize the node.
      * @param {String} name 
      */
-    constructor(behavior, goToBehaviors) {
+    constructor(args) {
         super();
         this.type = ENGINE_TYPES.GRAPH_NODE;
-        this.behavior = behavior;
-        this.goToBehaviors = goToBehaviors;
-    }    
+        this.goToBehaviors = [];
+        if (typeof args === "object" && args !== null) {
+            if (Object.hasOwn(args, 'uid')) {
+                this.loadNodeFromJSON(args);
+            } else {
+                for (const [key, value] of Object.entries(args)) {
+                    this[key] = value;
+                }
+            }
+        }
+    }
     
     /**
-     * Loads the nodes from a JSON file
+     * Loads the nodes from a JSON object.
      * @param {Object} nodesJSON
      */
     loadNodeFromJSON (nodesJSON) {
-        const keys = Object.keys(nodesJSON);
-        for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
+        for (const [key, value] of Object.entries(nodesJSON)) {
             if (key === "behavior") {
-                // Load behavior manually
-                console.log("Loading behaviors")
+                this.behavior = new Behavior(value);
             } else if (key === "goToBehaviors") {
-                console.log("LOading goto behaviors");
-                // Load graph manually
+                value.forEach(node => this.goToBehaviors.push(new Behavior(node)));
             } else {
                 this[key] = nodesJSON[key];
             }
-        }
+        };
     }
 
     /**

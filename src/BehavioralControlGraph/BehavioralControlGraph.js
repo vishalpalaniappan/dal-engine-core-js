@@ -13,30 +13,34 @@ class BehavioralControlGraph extends Base{
      * Initialize the behavioral control graph.
      * @param {String} name 
      */
-    constructor(name) {
+    constructor(args) {
         super();
         this.type = ENGINE_TYPES.BEHAVIORAL_CONTROL_GRAPH;
         this.nodes = [];
-        this.currentNode = null;
+        if (typeof args === "object" && args !== null) {
+            if (Object.hasOwn(args, 'uid')) {
+                this.loadGraphFromJSON(args);
+                return;
+            } else {
+                for (const [key, value] of Object.entries(args)) {
+                    this[key] = value;
+                }
+            }
+        }
     }
 
     /**
-     * Loads the graph from a JSON file
+     * Loads the graph from a JSON object..
      * @param {Object} graphJson
      */
     loadGraphFromJSON (graphJson) {
-        const keys = Object.keys(graphJson);
-        for (let i = 0; i < keys.length; i++) {
-            const key = keys[i];
+        for (const [key, value] of Object.entries(graphJson)) {
             if (key === "nodes") {
-                for (const node in graphJson[key]) {
-                    this.nodes.push(new GraphNode());
-                    this.nodes[this.nodes.length - 1].loadNodeFromJSON(node)
-                }
+                value.forEach(node => this.nodes.push(new GraphNode(node)));
             } else {
                 this[key] = graphJson[key];
             }
-        }
+        };
     }
     
     /**
@@ -46,7 +50,10 @@ class BehavioralControlGraph extends Base{
      * @returns 
      */
     addNode (behavior, goToBehaviors) {
-        const node = new GraphNode(behavior, goToBehaviors);
+        const node = new GraphNode({
+            behavior: behavior, 
+            goToBehaviors: goToBehaviors
+        });
         this.nodes.push(node);
         return node;
     }

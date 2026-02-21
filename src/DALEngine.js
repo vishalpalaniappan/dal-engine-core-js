@@ -13,9 +13,11 @@ import BehavioralControlGraph from "./BehavioralControlGraph/BehavioralControlGr
  * while the engine automatically debugs the execution.
  */
 export class DALEngine {
-    constructor(name) {
-        this.name = name;
+    constructor(args) {
         this.graph = new BehavioralControlGraph();
+        for (const [key, value] of Object.entries(args)) {
+            this[key] = value;
+        }
     }
 
     /**

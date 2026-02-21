@@ -8,14 +8,14 @@ import UnknownBehaviorError from '../src/Errors/UnknownBehaviorError.js';
 
 describe('DALEngine', () => {
     it('sets the name correctly', () => {
-        const dalInstance = new DALEngine("Library Manager");
+        const dalInstance = new DALEngine({name:"Library Manager"});
         expect(dalInstance.name).toBe("Library Manager");
     });
     
     it('adds node to graph', () => {
-        const d = new DALEngine("Library Manager");
-        const behavior1 = d.createBehavior("AcceptBookFromUser");
-        const behavior2 = d.createBehavior("AddBookToBasket");
+        const d = new DALEngine({name:"Library Manager"});
+        const behavior1 = d.createBehavior({name:"AcceptBookFromUser"});
+        const behavior2 = d.createBehavior({name:"AddBookToBasket"});
         const goToBehaviors = [behavior2];
 
         const node = d.graph.addNode(behavior1, goToBehaviors)
@@ -30,9 +30,9 @@ describe('DALEngine', () => {
     });
     
     it('find node that was added using behavior name', () => {
-        const d = new DALEngine("Library Manager");
-        const behavior1 = d.createBehavior("AcceptBookFromUser");
-        const behavior2 = d.createBehavior("AddBookToBasket");
+        const d = new DALEngine({name:"Library Manager"});
+        const behavior1 = d.createBehavior({name:"AcceptBookFromUser"});
+        const behavior2 = d.createBehavior({name:"AddBookToBasket"});
         const node = d.graph.addNode(behavior1, [behavior2])
 
         const foundNode = d.graph.findNode("AcceptBookFromUser");
@@ -40,10 +40,10 @@ describe('DALEngine', () => {
     });
     
     it('find node and check if observed behavior is valid transition', () => {
-        const d = new DALEngine("Library Manager");
-        const behavior1 = d.createBehavior("AcceptBookFromUser");
-        const behavior2 = d.createBehavior("AddBookToBasket");
-        const behavior3 = d.createBehavior("AnotherBehavior");
+        const d = new DALEngine({name:"Library Manager"});
+        const behavior1 = d.createBehavior({name:"AcceptBookFromUser"});
+        const behavior2 = d.createBehavior({name:"AddBookToBasket"});
+        const behavior3 = d.createBehavior({name:"AnotherBehavior"});
         d.graph.addNode(behavior1, [behavior2, behavior3])
         d.graph.addNode(behavior2, [])
         d.graph.addNode(behavior3, [])
@@ -79,9 +79,9 @@ describe('DALEngine', () => {
     });
 
     it('add invariant to participant', () => {
-        const d = new DALEngine("Library Manager");
-        const book = d.createParticipant("book");
-        const invariant = d.createInvariant("minLength");
+        const d = new DALEngine({name:"Library Manager"});
+        const book = d.createParticipant({name:"book"});
+        const invariant = d.createInvariant({name:"minLength"});
 
         book.addInvariant(invariant);
 
@@ -90,28 +90,32 @@ describe('DALEngine', () => {
     });
 
     it("write to file and load from file", async  () => {
-        let d = new DALEngine("Library Manager");
-        const book = d.createParticipant("book");
-        const invariant = d.createInvariant("minLength");
+        let d = new DALEngine({name:"Library Manager"});
+        const book = d.createParticipant({name:"book"});
+        const invariant = d.createInvariant({name:"minLength"});
         book.addInvariant(invariant);
 
-        const behavior1 = d.createBehavior("AcceptBookFromUser");
+        const behavior1 = d.createBehavior({name:"AcceptBookFromUser"});
         behavior1.addParticpant(book);
-        const behavior2 = d.createBehavior("AddBookToBasket");
-        const behavior3 = d.createBehavior("AnotherBehavior");
+        const behavior2 = d.createBehavior({name:"AddBookToBasket"});
+        const behavior3 = d.createBehavior({name:"AnotherBehavior"});
         d.graph.addNode(behavior1, [behavior2, behavior3]);
         d.graph.addNode(behavior2, []);
         d.graph.addNode(behavior3, []);
 
-        const filePath = resolve(__dirname, './temp.json')
+        const filePath = resolve(__dirname, './temp/temp.json')
         await writeFile(filePath, d.serialize())
 
-        d = new DALEngine("Library Manager");
+        d = new DALEngine({name:"Library Manager"});
         d.deserialize(await readFile(filePath, 'utf-8'));
         expect(d.graph.nodes.length).toBe(3);
 
         // Intentionally not cleaning up the file because I want to inspect
         // await unlink(filePath)
+
+        // This is a temporary file I create for my own inspection
+        const filePath2 = resolve(__dirname, './temp/temp2.json')
+        await writeFile(filePath2, d.serialize())
     });
 
 });
